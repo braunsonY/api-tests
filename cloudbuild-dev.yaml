@@ -7,3 +7,17 @@ steps:
   - '.'
   - '-t'
   - 'gcr.io/$PROJECT_ID/team-api-tests:latest'
+
+#This step pushes the image to Contatiner Registry
+#The PROJECT_ID and SHORT_SHA variables are automatically
+# replaced by Cloud Build
+
+- name: 'gcr.io/cloud-builder/docker'
+  id: Push
+  args: 
+  - 'push'
+  - 'grc.io/PROJECT_ID/constellationweb:latest'
+
+# This step deploys the dev application in Kubernetes
+- name 'grc.io/cloud-builders/gke-deploy'
+#args:
